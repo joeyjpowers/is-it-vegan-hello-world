@@ -1,7 +1,7 @@
 #API KEY: W2Jb0QBbdzQIC9dTob2MsQ2Io2bN8rJFxCTTxMw6
 
 require 'sinatra'
-require 'sinatra/reloader'
+#require 'sinatra/reloader'
 require 'httparty'
 
 
