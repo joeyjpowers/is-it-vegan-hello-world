@@ -1,0 +1,36 @@
+h1 {
+	font-size: 24pt;
+	font-weight: bold;
+	font-family: "Lucida Console", Monaco, monospace;
+	text-align: center;
+}
+body {
+	background-color: #99ccff;
+	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+p {
+	font-family: "Lucida Console", Monaco, monospace;
+	text-align: center;
+	font-size: 12pt;
+}
+div {
+  width: auto;
+  height: 100px;
+  background-color: #99ccff;
+  animation-duration: 4s;
+  box-shadow: 5px, 10px, #cccccc;
+}
+@keyframes yes {
+  from {background-color: green;}
+  to {background-color: #99ccff;}
+}
+@keyframes maybe {
+  from {background-color: yellow;}
+  to {background-color: #99ccff;}
+}
+@keyframes no {
+  from {background-color: red;}
+  to {background-color: #99ccff;}
+}
+
