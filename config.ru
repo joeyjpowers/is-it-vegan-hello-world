@@ -1,2 +1,2 @@
-require './hello_world'
+require './vegan'
 run Sinatra::Application
