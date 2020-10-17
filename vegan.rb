@@ -1059,7 +1059,7 @@ __END__
 
 	<form action="/", method = "post">
 		<input type="text" placeholder="Food Item" required id="food", name="desc"/>
-
+            <br>
 		<button id="submit">Check if Vegan...</button>
 	</form>
         <div><p id="result"><%= @result1 %></p></div>
