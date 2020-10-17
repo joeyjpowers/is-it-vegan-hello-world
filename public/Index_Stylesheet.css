@@ -1,20 +1,42 @@
 h1 {
-	font-size: 24pt;
-	font-weight: bold;
-	font-family: "Lucida Console", Monaco, monospace;
-	text-align: center;
+  font-size: 24pt;
+  font-weight: bold;
+  font-family: "Lucida Console", Monaco, monospace;
+  text-align: center;
+}
+input {
+  border-radius: 50pt;
+  height: 50px;
+  width: 300px;
+  font-size: 20pt;
+  border-width: 0pt;
+  text-align: center;
+  margin-top: 10px;
+}
+button  {
+  border-radius: 50pt;
+  height: 50px;
+  width: 200px;
+  font-size: 12pt;
+  margin-top: 10px;
+  border-width: 0pt;
+  background-color: black;
+  color: white;
+}
+button:hover  {
+  opacity: 50%;
 }
 body {
-	background-color: #99ccff;
-	text-align: center;
-	font-family: "Lucida Console", Monaco, monospace;
+  background-color: #99ccff;
+  text-align: center;
+  font-family: "Lucida Console", Monaco, monospace;
 }
 p {
-	font-family: "Lucida Console", Monaco, monospace;
-	text-align: center;
-	font-size: 12pt;
+  font-family: "Lucida Console", Monaco, monospace;
+  text-align: center;
+  font-size: 12pt;
 }
-div {
+h3 {
   width: auto;
   height: 100px;
   background-color: #99ccff;
