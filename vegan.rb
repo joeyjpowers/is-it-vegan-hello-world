@@ -14,12 +14,13 @@ post '/' do
 @entry = params[:desc].lstrip.rstrip.downcase
 
 url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=W2Jb0QBbdzQIC9dTob2MsQ2Io2bN8rJFxCTTxMw6&query='
-url = url + @entry
+url = url + @entry + "&dataType=Branded"
 response = HTTParty.get(url)
 @result = response.parsed_response
 if @result['totalHits'] == 0
         @result = 'There are zero hits'
 else
+        @food = @result['foods'][0]['description']
         if @result['foods'][0]['ingredients'] == ""
                 @result = @entry + '.'
         else
@@ -39,10 +40,6 @@ else
        
         
         @result = ingredients.map { |string| string.downcase } 
-        
-
-
-
 
         #traversing the various arrays to see if item is vegan
         
@@ -1051,7 +1048,6 @@ __END__
 </head>
 
 <body>
-	<!-- <script src="Index_JavaScript.js"></script> -->
 	<header>
 		<h1>Is It Vegan?</h1>
 		<p>Wondering if what you want to eat meets your vegan diet? Input a food item below and we'll let you know if it's vegan.</p>
@@ -1062,9 +1058,9 @@ __END__
 
 		<button id="submit">Check if Vegan...</button>
 	</form>
-        <div><p id="result1"><%= @result1 %></p></div>
+        <div><p id="result"><%= @result1 %></p></div>
         <div><p id="result"><%= @result %></p></div>
-        
+        <div><p id="food"><%= @food %></p></div>
 </body>
 
 
