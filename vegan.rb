@@ -1049,9 +1049,13 @@ __END__
 
 <body>
 	<header>
-		<h1>Is It Vegan?</h1>
-		<p>Wondering if what you want to eat meets your vegan diet? Input a food item below and we'll let you know if it's vegan.</p>
-	</header>
+            <h1>Is It Vegan?</h1>
+            <p>
+                  Wondering if what you want to eat meets your vegan diet? 
+                  <br>
+                  Input a food item below and we'll let you know if it's vegan.
+            </p>
+      </header>
 
 	<form action="/", method = "post">
 		<input type="text" placeholder="Food Item" required id="food", name="desc"/>
