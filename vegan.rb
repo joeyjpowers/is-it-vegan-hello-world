@@ -1,7 +1,8 @@
 #API KEY: W2Jb0QBbdzQIC9dTob2MsQ2Io2bN8rJFxCTTxMw6
+#milk upc: 021130073719
 
 require 'sinatra'
-#require 'sinatra/reloader'
+require 'sinatra/reloader'
 require 'httparty'
 
 
@@ -18,13 +19,21 @@ url = url + @entry + "&dataType=Branded"
 response = HTTParty.get(url)
 @result = response.parsed_response
 if @result['totalHits'] == 0
+        @entry = '00' + @entry
+        url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=W2Jb0QBbdzQIC9dTob2MsQ2Io2bN8rJFxCTTxMw6&query='
+        url = url + @entry + "&dataType=Branded"
+        response = HTTParty.get(url)
+        @result = response.parsed_response
+end
+if @result['totalHits'] == 0
         @result = 'There are zero hits'
+        
 else
-        @food = @result['foods'][0]['description']
+        @food = @result['foods'][0]
         if @result['foods'][0]['ingredients'] == ""
                 @result = @entry + '.'
         else
-                @result = @result['foods'][0]['ingredients']
+                @result = @result['foods'][0]['ingredients'].downcase
         end
         if @result.include? " and "
                 @result = @result.gsub!(" and ", ", ")
@@ -483,6 +492,7 @@ else
             "goose",
             "goose insulating feathers",
             "goose liver",
+            "grade a milk",
             "ground beef",
             "grouse",
             "guanine",
@@ -1026,7 +1036,7 @@ else
         elsif is_unsure == true
             @result1 = "We are not sure if this item is vegan!"
         elsif is_vegan == true 
-            @result1 = "This item is not vegan!"
+            @result1 = "This item is vegan!"
         else
             @result1 = "Something has gone terribly wrong!"
         end
@@ -1036,7 +1046,7 @@ else
     erb :get_page
 end
 __END__
- 
+
 @@get_page
 <!DOCTYPE html>
 <html lang="en">
