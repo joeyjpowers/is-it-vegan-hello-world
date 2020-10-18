@@ -2,9 +2,144 @@
 #milk upc: 021130073719
 
 require 'sinatra'
-#require 'sinatra/reloader'
+require 'sinatra/reloader'
 require 'httparty'
 
+fruits_and_veggies = ["alfalfa sprouts",
+"apple",
+"apricot",
+"artichoke",
+"asian pear",
+"asparagus",
+"atemoya",
+"avocado",
+"bamboo shoots",
+"banana",
+"bean sprouts",
+"beans",
+"beets",
+"belgian endive",
+"bell peppers",
+"bitter melon",
+"blackberries",
+"blueberries",
+"bok choy",
+"boniato",
+"boysenberries",
+"broccoflower",
+"broccoli",
+"brussels sprouts",
+"cabbage",
+"cactus pear",
+"cantaloupe",
+"carambola",
+"carrots",
+"casaba melon",
+"cauliflower",
+"celery",
+"chayote",
+"cherimoya",
+"cherries",
+"coconuts",
+"collard greens",
+"corn",
+"cranberries",
+"cucumber",
+"dates",
+"dried plums",
+"eggplant",
+"endive",
+"escarole",
+"feijoa",
+"fennel",
+"figs",
+"garlic",
+"gooseberries",
+"grapefruit",
+"grapes",
+"green beans",
+"green onions",
+"greens",
+"guava",
+"hominy",
+"honeydew melon",
+"horned melon",
+"iceberg lettuce",
+"jerusalem artichoke",
+"jicama",
+"kale",
+"kiwifruit",
+"kohlrabi",
+"kumquat",
+"leeks",
+"lemons",
+"lettuce",
+"lima beans",
+"limes",
+"longan",
+"loquat",
+"lychee",
+"madarins",
+"malanga",
+"mandarin oranges",
+"mangos",
+"mulberries",
+"mushrooms",
+"napa",
+"nectarines",
+"okra",
+"onion",
+"oranges",
+"papayas",
+"parsnip",
+"passion fruit",
+"peaches",
+"pears",
+"peas",
+"peppers",
+"persimmons",
+"pineapple",
+"plantains",
+"plums",
+"pomegranate",
+"potato",
+"potatoes",
+"prickly pear",
+"prunes",
+"pummelo",
+"pumpkin",
+"quince",
+"radicchio",
+"radishes",
+"raisins",
+"raspberries",
+"red cabbage",
+"rhubarb",
+"romaine lettuce",
+"rutabaga",
+"shallots",
+"snow peas",
+"spinach",
+"sprouts",
+"squash",
+"strawberries",
+"string beans",
+"sweet potato",
+"tangelo",
+"tangerines",
+"tomatillo",
+"tomato",
+"turnip",
+"ugli fruit",
+"water chestnuts",
+"watercress",
+"watermelon",
+"waxed beans",
+"yams",
+"yellow squash",
+"yuca",
+"cassava",
+"zucchini squash"]
 
 get '/' do
 @error = params[:error];
@@ -13,6 +148,13 @@ end
 
 post '/' do
 @entry = params[:desc].lstrip.rstrip.downcase
+
+in_list = false
+for food in fruits_and_veggies
+    if @entry == food
+        in_list = true
+    end
+end
 
 url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=W2Jb0QBbdzQIC9dTob2MsQ2Io2bN8rJFxCTTxMw6&query='
 url = url + @entry + "&dataType=Branded"
@@ -29,7 +171,11 @@ if @result['totalHits'] == 0
         @result = 'There are zero hits'
         
 else
-        @food = @result['foods'][0]
+        if !in_list
+            @food = @result['foods'][0]['description']
+        else
+            @food = @entry.upcase
+        end
         if @result['foods'][0]['ingredients'] == ""
                 @result = @entry + '.'
         else
@@ -47,9 +193,11 @@ else
         @result.gsub!(/[^0-9a-zA-Z,\- ]/, '')
         ingredients = @result.split(', ')
        
-        
-        @result = ingredients.map { |string| string.downcase } 
-
+        if !in_list
+            @result = ingredients.map { |string| string.downcase } 
+        else
+            @result = ""
+        end
         #traversing the various arrays to see if item is vegan
         
         maybe_vegan_ingredients = ["allantoin",
@@ -1031,7 +1179,9 @@ else
             is_vegan = true
         end
         
-        if is_not_vegan == true
+        if in_list == true
+            @result1 = "This item is vegan!"
+        elsif is_not_vegan == true
             @result1 = "This item is not vegan!"
         elsif is_unsure == true
             @result1 = "We are not sure if this item is vegan!"
