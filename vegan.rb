@@ -195,7 +195,7 @@ else
        
         if !in_list
             resultString = ""
-            for i in 0...ingredients.length-1
+            for i in 0...ingredients.length
                 if (i != ingredients.length - 1)
                     resultString += ingredients[i] + ", "
                 else
