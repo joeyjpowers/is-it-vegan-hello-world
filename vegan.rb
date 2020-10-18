@@ -2,7 +2,7 @@
 #milk upc: 021130073719
 
 require 'sinatra'
-require 'sinatra/reloader'
+#require 'sinatra/reloader'
 require 'httparty'
 
 fruits_and_veggies = ["alfalfa sprouts",
