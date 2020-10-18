@@ -2,7 +2,7 @@
 #milk upc: 021130073719
 
 require 'sinatra'
-#require 'sinatra/reloader'
+require 'sinatra/reloader'
 require 'httparty'
 
 fruits_and_veggies = ["alfalfa sprouts",
@@ -194,9 +194,19 @@ else
         ingredients = @result.split(', ')
        
         if !in_list
-            @result = ingredients.map { |string| string.downcase } 
+            resultString = ""
+            for i in 0...ingredients.length-1
+                if (i != ingredients.length - 1)
+                    resultString += ingredients[i] + ", "
+                else
+                    resultString
+                end
+            end
+            @result = resultString
+            @ingredientTag = "Ingredients:"
         else
             @result = ""
+            @ingredientTag = ""
         end
         #traversing the various arrays to see if item is vegan
         
@@ -1191,6 +1201,7 @@ else
             @result1 = "Something has gone terribly wrong!"
         end
     end
+    
 
 
     erb :get_page
@@ -1209,22 +1220,26 @@ __END__
 
 <body>
 	<header>
-            <h1>Is It Vegan?</h1>
-            <p>
-                  Wondering if what you want to eat meets your vegan diet? 
-                  <br>
-                  Input a food item below and we'll let you know if it's vegan.
-            </p>
-      </header>
-
-	<form action="/", method = "post">
-		<input type="text" placeholder="Food Item" required id="food", name="desc"/>
-            <br>
-		<button id="submit">Check if Vegan...</button>
-	</form>
+        <h1>Is It Vegan?</h1>
+        <p>
+        Wondering if what you want to eat meets your vegan diet?
+        <br>
+        Input a food item or UPC number below and we'll let you know if it's vegan.
+        <br>
+        <span style="font-style: italic;">Note that UPC numbers provide more specific results, so we recommend using a UPC number if available.</span>
+        </p>
+    </header>
+    
+    <form action="/", method = "post">
+        <input type="text" placeholder="Food item or UPC #" required id="food", name="desc"/>
+        <br>
+        <button id="submit">Check If Vegan...</button>
+    </form>
         <div><p id="result"><%= @result1 %></p></div>
+        <div><p id="result"><%= @ingredientTag %></p></div>
         <div><p id="result"><%= @result %></p></div>
         <div><p id="food"><%= @food %></p></div>
-</body>
+ </body>
+ 
 
 

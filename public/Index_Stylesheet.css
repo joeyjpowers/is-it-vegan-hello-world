@@ -43,16 +43,3 @@ h3 {
   animation-duration: 4s;
   box-shadow: 5px, 10px, #cccccc;
 }
-@keyframes yes {
-  from {background-color: green;}
-  to {background-color: #99ccff;}
-}
-@keyframes maybe {
-  from {background-color: yellow;}
-  to {background-color: #99ccff;}
-}
-@keyframes no {
-  from {background-color: red;}
-  to {background-color: #99ccff;}
-}
-
