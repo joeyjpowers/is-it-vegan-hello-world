@@ -1208,7 +1208,7 @@ __END__
 </head>
 
 <body>
-header>
+<header>
 <h1>Is It Vegan?</h1>
     <p>
       Wondering if what you want to eat meets your vegan diet? 
