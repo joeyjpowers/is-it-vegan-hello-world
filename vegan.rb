@@ -148,7 +148,7 @@ end
 
 post '/' do
 @entry = params[:desc].lstrip.rstrip.downcase
-
+@food = ""
 in_list = false
 for food in fruits_and_veggies
     if @entry == food
