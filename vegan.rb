@@ -199,7 +199,7 @@ else
                 if (i != ingredients.length - 1)
                     resultString += ingredients[i] + ", "
                 else
-                    resultString
+                    resultString += ingredients[i]
                 end
             end
             @result = resultString
