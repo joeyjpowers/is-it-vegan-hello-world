@@ -1,4 +1,3 @@
-#API KEY: W2Jb0QBbdzQIC9dTob2MsQ2Io2bN8rJFxCTTxMw6
 #milk upc: 021130073719
 
 require 'sinatra'
@@ -156,13 +155,13 @@ for food in fruits_and_veggies
     end
 end
 
-url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=W2Jb0QBbdzQIC9dTob2MsQ2Io2bN8rJFxCTTxMw6&query='
+url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=#{$api_key}&query='
 url = url + @entry + "&dataType=Branded"
 response = HTTParty.get(url)
 @result = response.parsed_response
 if @result['totalHits'] == 0
         @entry = '00' + @entry
-        url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=W2Jb0QBbdzQIC9dTob2MsQ2Io2bN8rJFxCTTxMw6&query='
+        url = 'https://api.nal.usda.gov/fdc/v1/foods/search?api_key=#{$api_key}&query='
         url = url + @entry + "&dataType=Branded"
         response = HTTParty.get(url)
         @result = response.parsed_response
